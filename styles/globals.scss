@@ -1,0 +1,10 @@
+@import 'variables';
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    font-size: 62.5%;
+    color: $grey;
+}

@@ -1,0 +1,29 @@
+.container {
+    padding: 8rem;
+}
+
+.autocomplete {
+    max-width: 70rem;
+    label {
+        font-size: 2rem;
+        background: white;
+        padding: 0;
+    }
+    input {
+        font-size: 1.5rem;
+    }
+    fieldset {
+        top: -5px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 0 8px;
+        overflow: hidden;
+        position: absolute;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: inherit;
+        pointer-events: none;
+    }
+}

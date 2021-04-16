@@ -1,65 +1,43 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import {useState} from 'react';
+import StockList from '../components/StockList';
+import stockSymbol from '../data/stockData.json';
+import {stockPriceGenerator} from '../utils/utils';
+import Form from '../components/Form';
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+export default function Home({ dataStocks }) {
+	const [inputState, setInputState] = useState('')
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+	const setInputValue = (text) => {
+		setInputState(text);
+	}
+	
+	const newStockArray = inputState ? dataStocks.filter(e => e.symbol == inputState) : dataStocks;
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+	return (
+		<>
+			<Head>
+				<title>Stock Market Recommender</title>
+			</Head>
+			<Form setInputValue={setInputValue} />
+			<StockList dataStocks={newStockArray} isSingle={!!inputState}/>
+		</>
+	);
 }
+
+export const getStaticProps = async () => {
+
+	// Switch for an api that provide data
+	// const result = await fetch(
+	// 	`https://stocks-url`,
+	// );
+	// const dataStocks = await result.json();
+
+	// Retrieve stock and values for last 10 days and today
+	const dataStocks = stockPriceGenerator(stockSymbol, new Date().getDate());
+	return {
+		props: {
+			dataStocks
+		},
+	};
+};
