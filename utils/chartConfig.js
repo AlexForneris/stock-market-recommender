@@ -16,7 +16,13 @@ export const chartConfig = (labels, value) => {
     const config = {
         type: 'line',
         data,
-        options: {}
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
     };
 
     return config;

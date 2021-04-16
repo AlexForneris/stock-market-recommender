@@ -3,11 +3,11 @@ import Chart from 'chart.js/auto';
 import { useRef, useEffect } from 'react';
 import { chartConfig } from '../utils/chartConfig';
 
-const Curve = ({ stockObject }) => {
+const Curve = ({ stockValuesObject }) => {
     const refCanvas = useRef();
     
-    // Get day dates from stock
-    const filtersObject = stockObject.values.filter((o) => o.date).reverse();;
+    // Get day and dates from stock object
+    const filtersObject = stockValuesObject.filter((o) => o.date).reverse();
     const labels = filtersObject.map(e => e.date);
     const value = filtersObject.map(e => e.value);
 

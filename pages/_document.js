@@ -5,6 +5,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
+					<meta name="robots" content="noindex, nofollow" />
 					<meta
 						name="keywords"
 						content="stock, market, recommender, buy, sell, hold, fake data"

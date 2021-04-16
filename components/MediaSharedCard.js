@@ -1,14 +1,21 @@
 import { Box, List, ListItem, Divider, Typography } from '@material-ui/core';
+import classNames from 'classnames/bind';
+import styles from '../styles/StockItem.module.scss';
 
-const MediaSharedCard = ({ stockObject }) => {
+const MediaSharedCard = ({ socialMediaObjects }) => {
 	return (
 		<>
-			<Typography variant="h5" component="h3" color="primary" style={{marginTop: '2rem'}}>
+			<Typography
+				variant="h5"
+				component="h3"
+				color="primary"
+				style={{ marginTop: '2rem' }}
+			>
 				Social media shared on the last 10 days:
 			</Typography>
 
 			<List dense>
-				{stockObject.socialMediaCount.map((socialMedia, i) => {
+				{socialMediaObjects.map((socialMedia, i) => {
 					return (
 						<Box key={i}>
 							{socialMedia.name && (
@@ -18,7 +25,9 @@ const MediaSharedCard = ({ stockObject }) => {
 											variant="h5"
 											component="p"
 											color="initial"
-                                            style={{textTransform: 'capitalize'}}
+											style={{
+												textTransform: 'capitalize',
+											}}
 										>
 											{socialMedia.name} -
 										</Typography>
@@ -52,7 +61,10 @@ const MediaSharedCard = ({ stockObject }) => {
 								</>
 							)}
 							{socialMedia.totalBuyShared && (
-								<ListItem disableGutters style={{marginTop: '1rem'}}>
+								<ListItem
+									disableGutters
+									style={{ marginTop: '1rem' }}
+								>
 									<Typography
 										variant="h5"
 										component="p"
@@ -111,12 +123,35 @@ const MediaSharedCard = ({ stockObject }) => {
 									</Typography>
 								</ListItem>
 							)}
+							{socialMedia.bestTrend && (
+								<ListItem
+									disableGutters
+									className={styles.bestTrend}
+								>
+									<Typography variant="h5" component="p">
+										Based on the last 10 days social media
+										shared the best trend is to &nbsp;
+										<strong
+											className={classNames(
+												socialMedia.bestTrend ==
+													'buy' && styles.buy,
+												socialMedia.bestTrend ==
+													'hold' && styles.hold,
+												socialMedia.bestTrend ==
+													'sell' && styles.sell,
+											)}
+										>
+											{socialMedia.bestTrend}
+										</strong>
+									</Typography>
+								</ListItem>
+							)}
 						</Box>
-					)
+					);
 				})}
 			</List>
 		</>
 	);
 };
 
-export default MediaSharedCard
+export default MediaSharedCard;

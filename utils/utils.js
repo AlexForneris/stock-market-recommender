@@ -1,4 +1,5 @@
 import socialMediaArray from '../data/socialMedia';
+import { sortBy } from 'lodash' 
 
 export const randomInteger = (min, max) => {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -33,7 +34,9 @@ export const stockPriceGenerator = (
 		newStockArray.push(stockObject);
 	}
 
-	return newStockArray;
+    const sortArray = sortBy(newStockArray, ["symbol"]);
+
+	return sortArray;
 };
 
 // Return array with social media count - random
@@ -65,6 +68,27 @@ export const socialMediaCountGenerator = (minShared = 1, maxShared = 200) => {
 	socialMediaCountArray.push({totalBuyShared});
 	socialMediaCountArray.push({totalHoldShared});
 	socialMediaCountArray.push({totalSellShared});
+    socialMediaCountArray.push(trendSocialMedia(totalBuyShared, totalHoldShared, totalSellShared));
 
 	return socialMediaCountArray;
+};
+
+// return most valuable social trend action object
+const trendSocialMedia = (buy, hold, sell) => {
+	let object = {};
+
+	if (buy > hold && buy > sell) {
+		object.value = buy;
+		object.bestTrend = 'buy';
+	}
+	else if (hold > buy && hold > sell) {
+		object.value = hold;
+		object.bestTrend = 'hold';
+	}
+	else if (sell > buy && sell > hold) {
+		object.value = sell;
+		object.bestTrend = 'sell';
+	}
+
+	return object;
 };

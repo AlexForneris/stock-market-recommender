@@ -2,11 +2,21 @@
 
 .grid {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
     position: relative;
     max-width: 1400px;
+    padding: 0 .5rem;
+    box-sizing: border-box;
+
+
+    @media (max-width: 600px) {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
 
 .card {
@@ -21,8 +31,15 @@
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
     box-sizing: border-box;
+    
+    @media (max-width: 1100px) {
+        flex-basis: 45%;
+        max-width: 45%;
+    }
+
     @media (max-width: 600px) {
-        width: 100%;
+        width: 90%;
+        flex-basis: 90%;
         max-width: 100%;
     }
 }
@@ -52,5 +69,34 @@
         width: 850px;
         max-width: 100%;
         flex-basis: 850px;
+            
+        @media (max-width: 1100px) {
+            flex-basis: 90%;
+            max-width: 90%;
+        }
     }
+}
+
+.bestTrend {
+    background: $white;
+    color: $blue;
+    border: 1px solid $blue-light;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    padding: 1rem;
+}
+
+.buy {
+    color: $succes;
+    font-size: 1.2em;
+}
+
+.hold {
+    color: $grey;
+    font-size: 1.2em;
+}
+
+.sell {
+    color: $error;
+    font-size: 1.2em;
 }

@@ -1,7 +1,7 @@
 import styles from '../styles/StockItem.module.scss';
 import { Box, Typography, Divider } from '@material-ui/core';
 import MediaSharedCard from './MediaSharedCard';
-import Curve from './Curve'
+import Curve from './Curve';
 
 const StockItem = ({ stockObject }) => {
 	return (
@@ -10,8 +10,10 @@ const StockItem = ({ stockObject }) => {
 				{stockObject.symbol}
 			</Typography>
 			<Divider component="p" style={{ marginBottom: '2rem' }} />
-			<Curve stockObject={stockObject} />
-			<MediaSharedCard stockObject={stockObject} />
+			<Curve stockValuesObject={stockObject.values} />
+			<MediaSharedCard
+				socialMediaObjects={stockObject.socialMediaCount}
+			/>
 		</Box>
 	);
 };

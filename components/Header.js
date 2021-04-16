@@ -1,9 +1,9 @@
-import { Container, Typography } from '@material-ui/core'
+import { Box, Typography, Container } from '@material-ui/core'
 import styles from '../styles/Header.module.scss'
 
 const Hero = () => {
 	return (
-        <Container maxWidth={false} disableGutters className={styles.header}>
+        <Box className={styles.header}>
             <Container maxWidth="md" align="center">
                 <Typography variant="h1" color="primary">
                     Stock Market Recommender
@@ -12,7 +12,7 @@ const Hero = () => {
                     Simple app that provide buy, hold or sell recommendation for a given stock symbol.
                 </Typography>
             </Container>
-        </Container>
+        </Box>
 	);
 };
 
